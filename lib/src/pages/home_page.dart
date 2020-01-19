@@ -1,5 +1,7 @@
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/material.dart';
+import 'package:qrscanner/src/bloc/scans_bloc.dart';
+import 'package:qrscanner/src/models/scan_model.dart';
 import 'package:qrscanner/src/pages/addresses_page.dart';
 import 'package:qrscanner/src/pages/maps_page.dart';
 
@@ -10,6 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
+  final scansBloc = new ScansBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,9 @@ class _HomePageState extends State<HomePage> {
         title: Text('QR Scanner'),
         actions: <Widget>[
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              scansBloc.deleteAllScans();
+            },
             icon: Icon(Icons.delete_forever),
           )
         ],
@@ -37,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _scanQR() async {
-    String futureString = '';
+    String futureString = 'https://github.com/ar4z';
   /*
     try {
       futureString = await BarcodeScanner.scan();
@@ -46,10 +51,11 @@ class _HomePageState extends State<HomePage> {
     }
 
     print('Future string: $futureString');
-
+    */
     if(futureString != null) {
-      print('Tenemos info');
-    }*/
+      final newScan  = ScanModel(value: futureString);
+      scansBloc.addScan(newScan);
+    }
   }
 
   Widget _callPage(int currentPage) {
