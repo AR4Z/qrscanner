@@ -4,6 +4,7 @@ import 'package:qrscanner/src/bloc/scans_bloc.dart';
 import 'package:qrscanner/src/models/scan_model.dart';
 import 'package:qrscanner/src/pages/addresses_page.dart';
 import 'package:qrscanner/src/pages/maps_page.dart';
+import 'package:qrscanner/src/utils/scan_utils.dart' as utils;
 
 class HomePage extends StatefulWidget {
   @override
@@ -55,6 +56,11 @@ class _HomePageState extends State<HomePage> {
     if(futureString != null) {
       final newScan  = ScanModel(value: futureString);
       scansBloc.addScan(newScan);
+
+      /*final newScan2  = ScanModel(value: 'geo:40.7242,-74.0073');
+      scansBloc.addScan(newScan2);*/
+
+      utils.openScan(newScan);
     }
   }
 
