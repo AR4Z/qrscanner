@@ -8,6 +8,7 @@ class MapsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    scansBloc.getScans();
     return StreamBuilder<List<ScanModel>>(
         stream: scansBloc.scansStream,
         builder:
@@ -36,7 +37,7 @@ class MapsPage extends StatelessWidget {
                     color: Theme.of(context).primaryColor),
                 title: Text(scans[i].value),
                 trailing: Icon(Icons.keyboard_arrow_right, color: Colors.grey),
-                onTap: () => utils.openScan(scans[i]),
+                onTap: () => utils.openScan(context, scans[i]),
               ),
             ),
           );

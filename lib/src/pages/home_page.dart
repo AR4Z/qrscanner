@@ -43,24 +43,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   _scanQR() async {
-    String futureString = 'https://github.com/ar4z';
-  /*
+    String futureString;
+  
     try {
       futureString = await BarcodeScanner.scan();
     } catch(e) {
       futureString = e.toString();
     }
-
-    print('Future string: $futureString');
-    */
+    
     if(futureString != null) {
       final newScan  = ScanModel(value: futureString);
       scansBloc.addScan(newScan);
 
-      /*final newScan2  = ScanModel(value: 'geo:40.7242,-74.0073');
-      scansBloc.addScan(newScan2);*/
-
-      utils.openScan(newScan);
+      utils.openScan(context, newScan);
     }
   }
 
